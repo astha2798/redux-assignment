@@ -1,9 +1,11 @@
-import { ADD_COMPANY,ADD_EMAIL,ADD_NAME,ADD_LOCATION } from './empTypes'
+import { ADD_COMPANY,ADD_EMAIL,ADD_NAME,ADD_LOCATION, FETCH_EMPLOYEES, ADD_EMPLOYEE } from './empTypes'
 const initialState = {
     name: '',
     email: '',
     company: '',
-    location:''
+    location:'',
+    employees:[],
+    employee:{}
 }
 
 const empReducer = (state = initialState, action)=>{
@@ -27,6 +29,16 @@ const empReducer = (state = initialState, action)=>{
             return{
                 ...state,
                 location: action.payload
+            }
+        case FETCH_EMPLOYEES:
+            return {
+                ...state,
+                employees: action.payload
+            }
+        case ADD_EMPLOYEE:
+            return {
+                ...state,
+                employee: action.payload
             }
         default:
             return state

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-export default class ShowAll extends Component {
+import { connect } from 'react-redux'
+import { addName, addLocation, addEmail,addCompany,fetchEmployees } from '../redux/empActions'
+class ShowAll extends Component {
 
  	constructor(props) {
     super(props);
@@ -10,23 +12,24 @@ export default class ShowAll extends Component {
     };
   }
   componentDidMount = () => {
-    this.getEmployees();
+    // this.getEmployees();
+    this.props.fetchEmployees()
   };
 
-  getEmployees = () => {
-    axios.get('http://localhost:5000/employees/')
-      .then((res) => {
-        // console.log(res);
-        const data = res.data;
-        this.setState({ employees: data });
-        // console.log('Data has been received!!');
-      })
-      .catch((err) => {
-        alert('Error retrieving data!!!');
-        // console.log(err.response);
+  // getEmployees = () => {
+  //   axios.get('http://localhost:5000/employees/')
+  //     .then((res) => {
+  //       // console.log(res);
+  //       const data = res.data;
+  //       this.setState({ employees: data });
+  //       // console.log('Data has been received!!');
+  //     })
+  //     .catch((err) => {
+  //       alert('Error retrieving data!!!');
+  //       // console.log(err.response);
 
-      });
-  }
+  //     });
+  // }
 //   componentDidUpdate(prevProps) {
 //     // console.log('componentDidUpdate');
 //   if(prevProps.data !== this.props.data) {
@@ -62,8 +65,28 @@ export default class ShowAll extends Component {
   return(
     <div key="this.props.data">
         <h3>EmployeeList</h3>
-        {this.displayEmployees(this.state.employees)}
+        {this.displayEmployees(this.props.employees)}
     </div>
   );
 }
   }
+  const mapStateToProps = state => {
+    return {
+        name: state.name,
+        location: state.location,
+        email: state.email,
+        company: state.company,
+        employees: state.employees
+    }
+}
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         addName: name => dispatch(addName(name)),
+//         addCompany: company => dispatch(addCompany(company)),
+//         addEmail: email => dispatch(addEmail(email)),
+//         addLocation: location => dispatch(addLocation(location))
+//     }
+// }
+
+export default connect(mapStateToProps, {fetchEmployees})(ShowAll)

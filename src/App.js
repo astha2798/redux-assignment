@@ -1,6 +1,6 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route,Switch} from "react-router-dom";
 import { Provider } from 'react-redux'
 import './App.css'
 
@@ -32,10 +32,12 @@ function App() {
         </div>
       </nav>
       <br/>
+      <Switch>
       <Route path="/add" component={AddEmployee} />
       <Route path="/showOne" component={ShowOne} />
       <Route path="/showAll" component={ShowAll} />
-      </div>
+      </Switch>
+      </div>>
     </Router>
     </Provider>
   );
