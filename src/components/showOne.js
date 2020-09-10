@@ -1,10 +1,16 @@
 import React from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
 import { addName, addLocation, addEmail,addCompany } from '../redux/empActions'
-
-function ShowOne(props){
-    console.log(props.name);
-    console.log("hiii");
+class ShowOne extends Component{
+    // console.log(props.name);
+    constructor(props) {
+        super(props)
+        
+    }
+    // console.log("hiii");\
+    render(){
+        // console.log(this.props.name.length);
     return(
         <div className="container">
         <table className="table table-dark">
@@ -18,15 +24,16 @@ function ShowOne(props){
             </thead>
             <tbody>
                 <tr>
-                <td>{props.name}</td>
-                <td>{props.email}</td>
-                <td>{props.company}</td>
-                <td>{props.location}</td>
+                <td>{this.props.name}</td>
+                <td>{this.props.email}</td>
+                <td>{this.props.company}</td>
+                <td>{this.props.location}</td>
                 </tr>
             </tbody>
         </table>
         </div>
             )
+    }
 }
 
 const mapStateToProps = state => {
